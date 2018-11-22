@@ -17,6 +17,7 @@ def get_interface_names():
     return interfaces
 
 def get_ssids(interface):
+    print("Scanning...")
     try:
         if interface.strip() == '':
             import sys

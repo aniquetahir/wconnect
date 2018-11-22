@@ -1,5 +1,9 @@
 ## Introduction
 Utility for easily connecting to wireless networks from the command line
+<p align="center">
+  <img width="600" src="https://raw.githubusercontent.com/aniquetahir/wconnect/master/example.svg">
+</p>
+
 
 ## Requirements
 
