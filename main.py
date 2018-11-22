@@ -39,9 +39,11 @@ def get_ssids(interface):
 
 
 def connect_network(password):
-    # TODO
-    exit()
-    pass
+    command = 'sudo iwconfig "%s" essid "%s" key "%s"' % (chosen_interface, chosen_ssid, password)
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print(result.stdout)
+    print(result.stderr)
+    exit(result.returncode)
 
 interface_names = get_interface_names()
 chosen_interface = ''
@@ -85,12 +87,13 @@ def ssid_selection_menu():
 
 def password_menu():
     password_prompt = urwid.Text("Password: ", align='center')
-    txt_password = urwid.Edit("", align='center', mask='*')
-    txt_password = urwid.AttrMap(txt_password, 'prompt')
+    txt_password_wid = urwid.Edit("", align='center', mask='*')
+    txt_password = urwid.AttrMap(txt_password_wid, 'prompt')
     btn_ok = urwid.Button('Ok')
     btn_cancel = urwid.Button('Cancel')
 
     urwid.connect_signal(btn_cancel, 'click', exit_program)
+    urwid.connect_signal(btn_ok, 'click', connect_network, weak_args=[txt_password_wid.edit_text])
 
 
     filler = urwid.Filler(
@@ -119,7 +122,6 @@ def on_ssid_chosen(button, choice):
     :param choice:
     :return:
     '''
-    # TODO
     global chosen_ssid
     chosen_ssid = choice
 

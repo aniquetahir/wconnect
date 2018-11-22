@@ -11,7 +11,7 @@ Utility for easily connecting to wireless networks from the command line
 - urwid
 
 ## Installation
-### Ubuntu/Debian
+### Ubuntu/Debian/Raspbian
 ```
 sudo apt update
 sudo apt install ifconfig iw
