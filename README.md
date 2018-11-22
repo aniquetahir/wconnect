@@ -14,18 +14,11 @@ Utility for easily connecting to wireless networks from the command line
 ### Ubuntu/Debian/Raspbian
 ```
 sudo apt update
-sudo apt install ifconfig iw
-pip install -u requirements.txt
-```
-
-### FreeBSD
-```
-pkg update
-pkg install ifconfig iw
-pip install -u requirements.txt
+sudo apt install ifconfig iw wireless-tools
+pip3 install -r requirements.txt
 ```
 
 ## Usage
 ```
-python main.py
+python3 main.py
 ```

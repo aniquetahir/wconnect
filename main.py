@@ -38,16 +38,20 @@ def get_ssids(interface):
         exit(0)
 
 
-def connect_network(password):
+def connect_network(button):
+    password = password_widget.get_edit_text()
+    main_loop.stop()
     command = 'sudo iwconfig "%s" essid "%s" key "%s"' % (chosen_interface, chosen_ssid, password)
+    print("Running command:\n%s" % command)
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print(result.stdout)
     print(result.stderr)
     exit(result.returncode)
 
 interface_names = get_interface_names()
-chosen_interface = ''
-chosen_ssid = ''
+chosen_interface = None
+chosen_ssid = None
+chosen_password = None
 
 
 def menu(title, choices, chosen_fn):
@@ -85,15 +89,19 @@ def ssid_selection_menu():
                         min_width=20, min_height=9)
     return urwid.AttrMap(top, 'bg')
 
+password_widget = None
+
 def password_menu():
+    global password_widget
     password_prompt = urwid.Text("Password: ", align='center')
-    txt_password_wid = urwid.Edit("", align='center', mask='*')
-    txt_password = urwid.AttrMap(txt_password_wid, 'prompt')
+    password_widget = urwid.Edit("", align='center', mask='*')
+    txt_password = urwid.AttrMap(password_widget, 'prompt')
     btn_ok = urwid.Button('Ok')
     btn_cancel = urwid.Button('Cancel')
 
+
     urwid.connect_signal(btn_cancel, 'click', exit_program)
-    urwid.connect_signal(btn_ok, 'click', connect_network, weak_args=[txt_password_wid.edit_text])
+    urwid.connect_signal(btn_ok, 'click', connect_network)
 
 
     filler = urwid.Filler(
