@@ -42,7 +42,7 @@ def get_ssids(interface):
 def connect_network(button):
     password = password_widget.get_edit_text()
     main_loop.stop()
-    command = 'sudo iwconfig "%s" essid "%s" key "%s"' % (chosen_interface, chosen_ssid, password)
+    command = 'sudo iwconfig "%s" essid "%s" key "s:%s"' % (chosen_interface, chosen_ssid, password)
     print("Running command:\n%s" % command)
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print(result.stdout)
