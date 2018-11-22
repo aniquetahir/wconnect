@@ -26,3 +26,6 @@ pip3 install -r requirements.txt
 ```
 python3 main.py
 ```
+
+## Releases
+You can run `wconnect` without installing python by downloading the binaries in the [Releases](https://github.com/aniquetahir/wconnect/releases)
